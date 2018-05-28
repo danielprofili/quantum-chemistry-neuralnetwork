@@ -1,0 +1,22 @@
+ =========================================================================
+|                                                                         |
+|       A note about this anaconda and modules: This version of           |
+|       Anaconda doesn’t play well with modules - once you load the       |
+|       anaconda module, module commands no longer work (not even         |
+|       module purge) unless you log out and back in again. We            |
+|       recommend you load the anaconda modules last if at all            |
+|       possible.                                                         |
+|                                                                         |
+ =========================================================================
+
+
+ =========================================================================
+|                                                                         |
+|       This version of anaconda is 'latest', meaning we will keep        |
+|       it up to date with current releases from continuum. We            |
+|       recommend creating your own environment to guard against          |
+|       version updates and changes. Please see                           |
+|       http://pace.gatech.edu/how-do-i-install-my-python-package         |
+|       for more details about creating your own python environment.      |
+|                                                                         |
+ =========================================================================

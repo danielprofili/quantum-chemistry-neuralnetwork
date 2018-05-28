@@ -1,6 +1,8 @@
-*.xyz
-*.gzmat
-*.out
-*.dma
-*.edu
-*.fchk
+subs/**
+gzmat/**
+inp/*.inp
+inp/*.pbs
+gzmat/*.gzmat
+pbs/*.pbs
+xyz/*.xyz
+example/test/*
