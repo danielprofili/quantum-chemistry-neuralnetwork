@@ -1,0 +1,12 @@
+File TFSI_230_41.fchk
+
+Angstrom
+Multipoles
+  switch 4
+  Limit 4
+  Limit 1 H
+  Radius C 0.53 N 0.53 O 0.53 S 0.53 F 0.53
+Start
+
+Finish
+

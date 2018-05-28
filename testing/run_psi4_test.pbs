@@ -1,0 +1,26 @@
+#PBS -N dma
+#PBS -q gemini
+#PBS -o dma.$PBS_JOBID
+#PBS -e dma.$PBS_JOBID
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=60:00
+
+cd $PBS_O_WORKDIR
+
+
+# here we need to use the conda download and environment for newer psi4
+# default PACE installation is too old for DMA
+
+module load anaconda3/latest
+source activate psi4
+
+export myscratch=/gpfs/scratch1/2/dprofili3/psi4.$PBS_JOBID
+export PSI_SCRATCH=$myscratch
+mkdir -p $PSI_SCRATCH
+
+export PSIDATADIR=""
+export PSIDATADIR=~/.conda/envs/psi4/share/psi4/
+
+psi4 -n 1 TFSI_90_99.xyz.inp TFSI_90_99.xyz.inp.out >& TFSI_90_99.xyz.inp.stdout
+
+rm -r $PSI_SCRATCH

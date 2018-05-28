@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/nv/hp22/dprofili3/.conda/envs/psi4/bin/psi4", line 248, in <module>
+    exec(content)
+  File "<string>", line 41, in <module>
+  File "/nv/hp22/dprofili3/.conda/envs/psi4/lib//python3.6/site-packages/psi4/driver/driver.py", line 460, in energy
+    wfn = procedures['energy'][lowername](lowername, molecule=molecule, **kwargs)
+  File "/nv/hp22/dprofili3/.conda/envs/psi4/lib//python3.6/site-packages/psi4/driver/procrouting/proc.py", line 2802, in run_dft
+    scf_wfn = run_scf(name, **kwargs)
+  File "/nv/hp22/dprofili3/.conda/envs/psi4/lib//python3.6/site-packages/psi4/driver/procrouting/proc.py", line 1942, in run_scf
+    scf_wfn = scf_helper(name, **kwargs)
+  File "/nv/hp22/dprofili3/.conda/envs/psi4/lib//python3.6/site-packages/psi4/driver/procrouting/proc.py", line 1330, in scf_helper
+    e_scf = scf_wfn.compute_energy()
+
+RuntimeError: 
+Fatal Error: Iterations did not converge.
+Error occurred in file: /scratch/psilocaluser/conda-builds/psi4_1495014881710/work/psi4/src/psi4/libparallel/process.cc on line: 194
+The most recent 5 function calls were:
+
+psi::PsiException::PsiException(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, char const*, int)
+psi::die_if_not_converged()
+psi::scf::HF::finalize_E()
+psi::scf::HF::compute_energy()
+

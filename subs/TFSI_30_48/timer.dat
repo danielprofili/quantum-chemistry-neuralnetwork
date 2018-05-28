@@ -1,0 +1,49 @@
+
+Host: rich133-c34-18-l.pace.gatech.edu
+
+Timers On : Mon Apr 23 21:59:27 2018
+Timers Off: Mon Apr 23 22:00:28 2018
+
+Wall Time:       61.00 seconds
+
+V: Grid     :       0.80u       0.02s 0.82418100w      1 call
+JK: (A|mn)  :       5.64u       0.00s   2.823199w      6 calls
+JK: (A|Q)^-1/2:       1.33u       0.04s   1.043679w      6 calls
+JK: (Q|mn)  :       1.52u       0.00s   1.519859w      6 calls
+HF: Form H  :       0.00u       0.00s 0.60550000w      1 call
+HF: Form S/X:       0.02u       0.00s 0.00915400w      1 call
+HF: Guess   :       0.46u       0.01s 0.23222700w      1 call
+SAD Guess   :       0.46u       0.01s 0.22949200w      1 call
+JK: D       :       0.02u       0.00s   0.003914w     46 calls
+JK: USO2AO  :       0.00u       0.00s   0.001742w     46 calls
+JK: JK      :      13.83u       0.82s   7.614019w     46 calls
+JK: J       :       0.79u       0.03s   0.421030w     47 calls
+JK: J1      :       0.37u       0.02s   0.200403w     81 calls
+JK: J2      :       0.42u       0.01s   0.217740w     81 calls
+JK: K       :      12.52u       0.29s   6.687584w     47 calls
+JK: K1      :       7.43u       0.00s   3.712971w     81 calls
+JK: K2      :       5.09u       0.29s   2.973873w     81 calls
+JK: AO2USO  :       0.00u       0.00s   0.000050w     46 calls
+DIISManager::add_entry:       0.08u       0.01s   0.105644w     45 calls
+DIISManager::extrapolate:       0.77u       0.13s   1.850133w     44 calls
+DIISManager::extrapolate: bMatrix setup:       0.59u       0.11s   0.920185w     44 calls
+DIISManager::extrapolate: bMatrix pseudoinverse:       0.00u       0.00s   0.001077w     44 calls
+DIISManager::extrapolate: form new data:       0.18u       0.02s   0.928624w     44 calls
+HF: Form G  :      58.51u       1.21s      50.33w     12 calls
+RKS: Form V :      44.67u       0.39s      42.70w     12 calls
+V: D        :       0.00u       0.00s   0.003759w     12 calls
+V: USO2AO   :       0.00u       0.00s   0.000795w     12 calls
+V: V        :      44.66u       0.39s      42.70w     12 calls
+Properties  :      29.16u       0.23s      27.61w   3528 calls
+Points      :      21.27u       0.15s      20.23w   3528 calls
+Functional  :       8.34u       0.08s   8.302846w   3528 calls
+V_XC        :       7.11u       0.06s   6.756094w   3528 calls
+LSDA        :       5.50u       0.04s   5.078993w   7056 calls
+GGA         :       1.43u       0.01s   1.527211w   3528 calls
+V: AO2USO   :       0.00u       0.00s   0.000023w     12 calls
+HF: Form F  :       0.00u       0.00s   0.001734w     12 calls
+HF: DIIS    :       0.93u       0.15s   1.990411w     12 calls
+HF: Form C  :       0.17u       0.00s   0.110400w     12 calls
+HF: Form D  :       0.02u       0.00s   0.004034w     12 calls
+
+***********************************************************
