@@ -14,6 +14,7 @@ do
 # f is the folder (i.e. the perturbation name TFSI_xxx_xx)
     cd $f 
     #echo $f 
+    echo "$f\n" >> $working_dir/input
     cat $f.charges >> $working_dir/input
     cd $working_dir
     cat xyz/$f.xyz >> $working_dir/input
