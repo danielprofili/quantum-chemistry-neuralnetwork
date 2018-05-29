@@ -1,5 +1,4 @@
-subs/**
-gzmat/**
+subs/
 inp/*.inp
 inp/*.pbs
 gzmat/*.gzmat
