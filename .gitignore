@@ -5,3 +5,5 @@ gzmat/*.gzmat
 pbs/*.pbs
 xyz/*.xyz
 example/test/*
+pbs/
+inp/testing
