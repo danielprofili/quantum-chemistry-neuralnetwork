@@ -43,3 +43,5 @@ mv $inp_folder/*pbs $pbs_folder
 # set up the submission directories
 ./sub_setup.sh
 
+# generate the input file
+./nn_input.sh
