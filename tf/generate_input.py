@@ -13,9 +13,12 @@ args = parser.parse_args()
 reg = re.compile('TFSI_[0-9]{1,3}_[0-9]{1,3}')
 
 f = open(args.inputfile)
-line = ''
-while (not reg.match(line)):
-    line = f.readline()
+line = f.readline() 
+while (line != ''):
+    while (not reg.match(line)):
+        line = f.readline()
 
 # DEBUG:
 print(line)
+
+f.close()
