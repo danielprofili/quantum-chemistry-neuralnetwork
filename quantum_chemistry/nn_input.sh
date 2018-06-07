@@ -22,6 +22,7 @@ do
     echo -e "\n===================\n" >> $working_dir/input
     cat gzmat/$f.gzmat >> $working_dir/input
     echo -e "\n===================\n" >> $working_dir/input
+    echo -e "Begin charges\n" >> $working_dir/input
     cat $working_dir/subs/$f/$f.charges >> $working_dir/input
     echo -e "\n===================\n" >> $working_dir/input
     #echo DEBUG
