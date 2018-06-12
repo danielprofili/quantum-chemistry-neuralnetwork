@@ -42,7 +42,10 @@ def parse_input(inputfile):
     # parser.add_argument("inputfile", help="path to the input file")
     # args = parser.parse_args()
     
-
+    # empty list that will eventually contain 36000 perturbations' worth of 
+    # tuples containing a list of all 15 atoms in order, pairwise distances,
+    # and charges for each atom in order
+    big_list = []
     # set up regex parsing object for parsing the molecule name (TFSI_###_###)
     reg = re.compile('TFSI_[0-9]{1,3}_[0-9]{1,3}\.gzmat')
     f = open(inputfile)
@@ -72,12 +75,16 @@ def parse_input(inputfile):
             if len(chg) > 0:
                 charges.append(float(chg[0]))
             line = f.readline()
-           
-        print(charges)
-        raw_input()
+        
+        # create the big tuple containing all data for this perturbation
+        big_tuple = (atoms, dists, charges)
+        big_list.append(big_tuple)
+
+        # now should go to the next atom
+
     # close the file
     f.close()
-
+    return big_list
 
 # for debugging
 parse_input(sys.argv[1])
