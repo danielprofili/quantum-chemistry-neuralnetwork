@@ -53,7 +53,7 @@ def parse_input(inputfile):
     while line != '':
         while (not reg.match(line) and f != ''):
             line = f.readline()
-
+        atom_name = line
         # now at the line containing the xyz
         line = f.readline()
         xyz = ''
@@ -81,6 +81,12 @@ def parse_input(inputfile):
         big_list.append(big_tuple)
 
         # now should go to the next atom
+        # DEBUG:
+        print('atom ' + atom_name + ' done')
+        print(line)
+        if line == '':
+            raw_input()
+
 
     # close the file
     f.close()
