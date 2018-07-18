@@ -17,6 +17,8 @@ NNff = NNforce_field( 'FF1' )
 
 # compute displacement tensor for all data points, output as numpy array
 rij = routines.compute_displacements(xyz)
+print(rij)
+input()
 
 # construct symmetry functions for NN input 
 sym_input = routines.construct_symmetry_input( NNff , rij , aname )
