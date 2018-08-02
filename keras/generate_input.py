@@ -50,76 +50,78 @@ def parse_input(inputfile):
     # and charges for each atom in order
     dist_list = []
     chg_list = []
+    atom_names = []
     # set up regex parsing object for parsing the molecule name (TFSI_###_###)
     reg = re.compile('TFSI_[0-9]{1,3}_[0-9]{1,3}\.gzmat')
-    f = open(inputfile)
-    line = f.readline() 
-    while line != '':
-        # DEBUG
-        line_number = 0
-        while (not reg.match(line) and line != ''):
+    #f = open(inputfile)
+    #line = f.readline() 
+    with open(inputfile) as f:
+        line = f.readline()    
+        while line != '':
+            while (not (reg.match(line) or line == '')):
+                # Locate the next location of xyz data
+                # (i.e. where there's a TFSI_XX_XX.gzmat)
+                line = f.readline()
+
+            atom_name = line
+
+            # now at the line containing the xyz
             line = f.readline()
-            line_number = line_number + 1
-            #print("\"" + line + "\"")
-            #if "TFSI_90" in line:
+            xyz = ''
+            while '==================' not in line and line != '':
+                xyz += line
+                line = f.readline()
+            
+            # DEBUG
+            #if "TFSI_90_99" in atom_name:
+            #    print(xyz)
             #    input()
 
-        atom_name = line
-        # now at the line containing the xyz
-        line = f.readline()
-        xyz = ''
-        while '==================' not in line and line != '':
-            xyz += line
+            # now have the xyz block
+            dists, atoms = get_dists(xyz)
+            #print(atoms)
+            #print(dists)
+            #print(len(dists[0]))
+            #print(len(dists))
+            #input()
+            while "Begin charges" not in line and line != '':
+                line = f.readline()
+
             line = f.readline()
-        
-
-        if "TFSI_90_99" in atom_name:
-            print(xyz)
-            print(line_number)
-            input()
-
-
-        # now have the xyz block
-        dists, atoms = get_dists(xyz)
-        #print(atoms)
-        #print(dists)
-        #print(len(dists[0]))
-        #print(len(dists))
-        #input()
-        while "Begin charges" not in line:
+            # next line is the first charge
             line = f.readline()
-            if line == '' and "TFSI_90_99" in atom_name:
-                print(line_number)
-                input()
-        line = f.readline()
-        # next line is the first charge
-        line = f.readline()
-        charges = [] 
-        while '==================' not in line:
-            chg = re.findall('-?\d.\d*', line)
-            if len(chg) > 0:
-                charges.append(float(chg[0]))
-            line = f.readline()
-        
-        # create the big tuple containing all data for this perturbation
-        #big_tuple = (atoms, dists, charges)
-        #dist_list.append(big_tuple)
+            charges = [] 
+            while '==================' not in line and line != '':
+                chg = re.findall('-?\d.\d*', line)
+                if len(chg) > 0:
+                    charges.append(float(chg[0]))
+                line = f.readline()
+            
+            # create the big tuple containing all data for this perturbation
+            #big_tuple = (atoms, dists, charges)
+            #dist_list.append(big_tuple)
 
-        # create list of all pairwise distance arrays
-        dist_list.append(dists)
-        chg_list.append(charges)
+            # create list of all pairwise distance arrays
+            dist_list.append(dists)
+            chg_list.append(charges)
 
-        # now should go to the next atom
-        # DEBUG:
-        #print('atom ' + atom_name + ' done')
-        #print(line)
-        #if line == '':
-        #    raw_input()
+            # now should go to the next atom
+            # DEBUG:
+            #print('atom ' + atom_name + ' done')
+            #print(line)
+            #if line == '':
+            #    raw_input()
+
+        # reached end of file
 
 
-    # close the file
-    f.close()
+
+
+
+
+    # done reading the file
+
     return dist_list, chg_list, atoms
 
 # for debugging
-parse_input(sys.argv[1])
+#parse_input(sys.argv[1])

@@ -12,18 +12,22 @@ from force_field_parameters import *
 inputfile='input.qc'
 
 # read input data, output as numpy arrays 
+print('Reading input data...')
 (rij, charges, atom_names) = gen.parse_input(inputfile)
-print(rij)
-input()
-print(charges)
-input()
-print(atom_names)
+#print(rij)
+#input()
+#print(charges)
+#input()
+#print(atom_names)
+print('...done')
 
 # load the Neural network force field definitions
 NNff = NNforce_field( 'FF1' )
 
 # construct symmetry functions for NN input 
+print('Constructing symmetry functions...')
 sym_input = routines.construct_symmetry_input( NNff , rij , atom_names )
+print('...done')
 
 #*****************************************
 # call this routine if we want to compute histrograms of symmetry input
