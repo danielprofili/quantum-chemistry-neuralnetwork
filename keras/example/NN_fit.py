@@ -11,14 +11,18 @@ inputfile='h2o_h2o_dummy_Eint_10mh.bohr'
 
 # read input data, output as numpy arrays 
 (aname, xyz, energy ) = routines.read_sapt_data( inputfile )
+print(aname)
+input()
 
 # load the Neural network force field definitions
 NNff = NNforce_field( 'FF1' )
 
 # compute displacement tensor for all data points, output as numpy array
 rij = routines.compute_displacements(xyz)
-print(rij)
-input()
+# print(rij)
+# print(len(rij))
+# print(len(rij[0]))
+# input()
 
 # construct symmetry functions for NN input 
 sym_input = routines.construct_symmetry_input( NNff , rij , aname )
@@ -32,7 +36,10 @@ sym_input = routines.construct_symmetry_input( NNff , rij , aname )
 # the number of unique neural networks is the number of unique elements, create
 # list linking elements to unique atomtypes
 (ntype, atype, atypename) = routines.create_atype_list( aname )
-
+print(ntype)
+print(atype)
+print(atypename)
+input()
 
 # now construct NN model
 # for keras 2.2, the Network/Model class is found in source keras/engine/network.py
@@ -47,7 +54,7 @@ sym_input = routines.construct_symmetry_input( NNff , rij , aname )
 # here we initialize a list of element specific NNs, where each NN is a 1-D layer
 # we need a unique layer object for each element, for each layer.  Thus loop over layers and elements
 
-n_layer=2
+n_layer=3
 NNunique=[]
 inputelement=[]
 
@@ -113,11 +120,11 @@ predictions = Lambda(lambda x: K.sum(x, axis=1), output_shape=(1,))(NNwhole)
 
 
 model = Model(inputs=inputs, outputs=predictions)
-model.compile(optimizer='sgd', loss='mean_squared_error')
+model.compile(optimizer='adam', loss='mean_squared_error')
 
 
 print( "fitting Neural network to interaction energy data...")
-model.fit( sym_input , energy, batch_size=len(energy), epochs=20 )
+model.fit( sym_input , energy, batch_size=0.1*len(energy), epochs=20 )
 
 print( "done fitting Neural network" )
  

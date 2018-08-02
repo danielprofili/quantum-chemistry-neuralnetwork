@@ -10,7 +10,7 @@ The way this should work is that we should define classes of "force fields", wit
 each class corresponding to a different collection of symmetry function types and definitions
 """
 
-class elementNN(object):
+class ElementNN(object):
     """
     this object contains all definitions for element-specific neural network,
     including symmetry function definitions, weight parameters, etc.

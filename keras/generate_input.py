@@ -10,9 +10,8 @@ import sys
 def get_dists(xyz):
     # get the xyz coords from the .xyz block
     nums = [float(s) for s in re.findall('-?\d\.\d*', xyz)]
+    # the elements being used
     elems = [s for s in re.findall('[A-Z]', xyz)]
-    input()
-    # arrange them into a triplet for each molecule
     pos = [[nums[x], nums[x+1], nums[x+2]] for x in range(0, len(nums), 3)]
     #tup_list = []
     #dist_list = []
@@ -36,7 +35,7 @@ def get_dists(xyz):
             #dist_list.append(dist)
 
     #return (tup_list, dist_list)
-    return dists
+    return dists, elems
 
 
 # begin the main method
@@ -49,24 +48,39 @@ def parse_input(inputfile):
     # empty list that will eventually contain 36000 perturbations' worth of 
     # tuples containing a list of all 15 atoms in order, pairwise distances,
     # and charges for each atom in order
-    big_list = []
+    dist_list = []
+    chg_list = []
     # set up regex parsing object for parsing the molecule name (TFSI_###_###)
     reg = re.compile('TFSI_[0-9]{1,3}_[0-9]{1,3}\.gzmat')
     f = open(inputfile)
     line = f.readline() 
     while line != '':
-        while (not reg.match(line) and f != ''):
+        # DEBUG
+        line_number = 0
+        while (not reg.match(line) and line != ''):
             line = f.readline()
+            line_number = line_number + 1
+            #print("\"" + line + "\"")
+            #if "TFSI_90" in line:
+            #    input()
+
         atom_name = line
         # now at the line containing the xyz
         line = f.readline()
         xyz = ''
-        while '==================' not in line:
+        while '==================' not in line and line != '':
             xyz += line
             line = f.readline()
         
+
+        if "TFSI_90_99" in atom_name:
+            print(xyz)
+            print(line_number)
+            input()
+
+
         # now have the xyz block
-        dists = get_dists(xyz)
+        dists, atoms = get_dists(xyz)
         #print(atoms)
         #print(dists)
         #print(len(dists[0]))
@@ -74,6 +88,9 @@ def parse_input(inputfile):
         #input()
         while "Begin charges" not in line:
             line = f.readline()
+            if line == '' and "TFSI_90_99" in atom_name:
+                print(line_number)
+                input()
         line = f.readline()
         # next line is the first charge
         line = f.readline()
@@ -86,10 +103,11 @@ def parse_input(inputfile):
         
         # create the big tuple containing all data for this perturbation
         #big_tuple = (atoms, dists, charges)
-        #big_list.append(big_tuple)
+        #dist_list.append(big_tuple)
 
         # create list of all pairwise distance arrays
-        big_list.append((dists, charges))
+        dist_list.append(dists)
+        chg_list.append(charges)
 
         # now should go to the next atom
         # DEBUG:
@@ -101,7 +119,7 @@ def parse_input(inputfile):
 
     # close the file
     f.close()
-    return big_list
+    return dist_list, chg_list, atoms
 
 # for debugging
 parse_input(sys.argv[1])
