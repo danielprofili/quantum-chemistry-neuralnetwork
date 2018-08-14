@@ -26,6 +26,8 @@ rij = routines.compute_displacements(xyz)
 
 # construct symmetry functions for NN input 
 sym_input = routines.construct_symmetry_input( NNff , rij , aname )
+print(aname)
+input()
 
 #*****************************************
 # call this routine if we want to compute histrograms of symmetry input

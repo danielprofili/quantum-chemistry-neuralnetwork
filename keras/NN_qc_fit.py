@@ -3,30 +3,45 @@ from keras.models import Model, Sequential
 from keras.layers import Input, Lambda, Dense, Activation, concatenate
 import keras.backend as K
 import numpy as np
-#import routines as routines
+import routines as routines
 import generate_input as gen
 import symmetry_functions as sym
-from force_field_parameters import *
+import qc_ff_params as ff_params
 
 # name of the input file
 inputfile='input.qc'
 
 # read input data, output as numpy arrays 
 print('Reading input data...')
-(rij, charges, atom_names) = gen.parse_input(inputfile)
+(rij, charges) = gen.parse_input(inputfile)
+atom_names = gen.get_atom_names(inputfile)
 #print(rij)
+#print(type(rij))
+#print(len(rij))
 #input()
 #print(charges)
 #input()
 #print(atom_names)
+#input()
 print('...done')
 
+
+# the number of unique neural networks is the number of unique elements, create
+# list linking elements to unique atomtypes
+(ntype, atype, atypename) = routines.create_atype_list( atom_names )
+# debug
+#print(ntype)
+#print(atype)
+#print(atypename)
+#input('pause')
+
+
 # load the Neural network force field definitions
-NNff = NNforce_field( 'FF1' )
+NNff = ff_params.NNforce_field( 'FF1', atypename)
 
 # construct symmetry functions for NN input 
 print('Constructing symmetry functions...')
-sym_input = routines.construct_symmetry_input( NNff , rij , atom_names )
+sym_input = routines.construct_symmetry_input( NNff , rij , atom_names)
 print('...done')
 
 #*****************************************
@@ -35,9 +50,6 @@ print('...done')
 #******************************************
 #flag = routines.test_symmetry_input(sym_input)
 
-# the number of unique neural networks is the number of unique elements, create
-# list linking elements to unique atomtypes
-(ntype, atype, atypename) = routines.create_atype_list( atom_names )
 
 
 # now construct NN model

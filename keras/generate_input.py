@@ -8,6 +8,9 @@ import sys
 #   contains the distance (in angstroms) between atom_i and atom_j
 
 def get_dists(xyz):
+    if len(xyz) == 0:
+        return [], []
+
     # get the xyz coords from the .xyz block
     nums = [float(s) for s in re.findall('-?\d\.\d*', xyz)]
     # the elements being used
@@ -37,6 +40,25 @@ def get_dists(xyz):
     #return (tup_list, dist_list)
     return dists, elems
 
+# get_atom_names: get the non-unique atoms from an input qc file
+def get_atom_names(inputfile):
+    atom_names = []
+    with open(inputfile) as f:
+        line = f.readline()
+        while line != '' and 'gzmat' not in line:
+            line = f.readline()
+        
+        line = f.readline()
+        if line != '':
+            while line != '' and '====' not in line:
+                #print(line)
+                #input('pause')
+                if line != '\n':
+                    atom_names.append(line[0])
+
+                line = f.readline()
+
+    return atom_names
 
 # begin the main method
 def parse_input(inputfile):
@@ -50,7 +72,6 @@ def parse_input(inputfile):
     # and charges for each atom in order
     dist_list = []
     chg_list = []
-    atom_names = []
     # set up regex parsing object for parsing the molecule name (TFSI_###_###)
     reg = re.compile('TFSI_[0-9]{1,3}_[0-9]{1,3}\.gzmat')
     #f = open(inputfile)
@@ -62,8 +83,6 @@ def parse_input(inputfile):
                 # Locate the next location of xyz data
                 # (i.e. where there's a TFSI_XX_XX.gzmat)
                 line = f.readline()
-
-            atom_name = line
 
             # now at the line containing the xyz
             line = f.readline()
@@ -113,15 +132,26 @@ def parse_input(inputfile):
             #    raw_input()
 
         # reached end of file
-
-
+    
+    # convert lists into 3d arrays
+    dist_array = np.array(dist_list)
+    charge_array = np.array(chg_list)
+    #dist_array = np.zeros([len(dist_list[0]), len(dist_list[0]), len(dist_list)])
+    #charge_array = np.zeros([len(chg_list[0]), len(chg_list[0]), len(chg_list)])
+    #for i in range(0, len(dist_list)):
+    #    print(dist_list[i])
+    #    print(type(dist_list[i]))
+    #    print(dist_list[i].shape)
+    #    input('pause')
+    #    dist_array[:][:][i] = dist_list[i]  
+    #    charge_array[:][:][i] = chg_list[i] 
 
 
 
 
     # done reading the file
-
-    return dist_list, chg_list, atoms
+    #return dist_list, chg_list 
+    return dist_array, charge_array
 
 # for debugging
 #parse_input(sys.argv[1])

@@ -32,10 +32,10 @@ class NNforce_field(object):
     the atomic neural networks
     """
 
-    def __init__(self, name):
+    def __init__(self, name, atypename):
         # setup attributes of force field based on name
         if name is 'FF1':
-           self.initialize_FF1()
+           self.initialize_FF1(atypename)
         else:
            print("force field name ", name , "  is not recognized")
            sys.exit()
@@ -64,7 +64,7 @@ class NNforce_field(object):
         self.element_force_field={}
         
         for atom in atoms_list:
-            elem = elementNN()
+            elem = ElementNN(atom)
             self.element_force_field[atom] = elem
 
             # range for shift is [2, 5] angstroms
