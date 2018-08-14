@@ -72,6 +72,7 @@ def parse_input(inputfile):
     # and charges for each atom in order
     dist_list = []
     chg_list = []
+    atom_names = get_atom_names(inputfile)
     # set up regex parsing object for parsing the molecule name (TFSI_###_###)
     reg = re.compile('TFSI_[0-9]{1,3}_[0-9]{1,3}\.gzmat')
     #f = open(inputfile)
@@ -121,7 +122,8 @@ def parse_input(inputfile):
             #dist_list.append(big_tuple)
 
             # create list of all pairwise distance arrays
-            dist_list.append(dists)
+            if len(dists) > 0:
+                dist_list.append(dists)
             chg_list.append(charges)
 
             # now should go to the next atom
@@ -151,7 +153,10 @@ def parse_input(inputfile):
 
     # done reading the file
     #return dist_list, chg_list 
-    return dist_array, charge_array
+    #print(dist_array.shape)
+    #print(dist_array.shape)
+    #input("debug")
+    return atom_names, dist_array, charge_array
 
 # for debugging
 #parse_input(sys.argv[1])

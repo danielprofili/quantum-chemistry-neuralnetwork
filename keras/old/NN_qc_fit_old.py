@@ -98,10 +98,10 @@ for i_type in range(ntype):
 NNtotal=[]
 inputs=[]
 # now apply element specific layer to each atom
-for i_atom in range(len(aname)):
+for i_atom in range(len(atom_names)):
     itype = atype[i_atom]
     # input size depends on element, as there could be different number of symmetry functions for each element
-    typeNN = NNff.element_force_field[ aname[i_atom] ]
+    typeNN = NNff.element_force_field[ atom_names[i_atom] ]
     i_size = len( typeNN.symmetry_functions )
     atom_input = Input(shape=(i_size,))
 
@@ -128,6 +128,7 @@ NNwhole = concatenate( NNtotal , axis=-1)
 # output system energy as sum of atomic energies, so output dimension (units) is 1,
 # we are just summing atomic contributions here... K is a keras object set to either tensorflow or theanos
 #predictions = Lambda(lambda x: K.sum(x, axis=1), output_shape=(1,))(NNwhole)
+predictions = concatenate(NNtotal)
 
 
 model = Model(inputs=inputs, outputs=predictions)
