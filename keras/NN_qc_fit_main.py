@@ -5,6 +5,7 @@ import keras.backend as K
 import tensorflow as tf
 import numpy as np
 import routines2 as routines
+import get_test_data as gt
 import generate_input as gen
 #from FFenergy_openMM import compute_SAPT_FF_energies
 import symmetry_functions as sym
@@ -16,8 +17,9 @@ inputfile='input.qc'
 
 # read input data, output as numpy arrays
 (aname, rij, charges ) = gen.parse_input( inputfile )
-# coordinates read in as Bohr
-#print("NN will use bohr units consistent with input coordinates")
+
+# DEBUGGING
+(xyz_sample, charges_sample) = gt.get_test_data();
 
 # compute SAPT-FF energies
 #energy_SAPTFF = compute_SAPT_FF_energies( xyz , 'h2o_template.pdb', 'water_residue.xml' , 'water_sapt.xml' )
@@ -29,7 +31,7 @@ inputfile='input.qc'
 #energy_fit = energy * 2.6255 - np.array( energy_SAPTFF )
 
 # load the Neural network force field definitions
-NNff = NNforce_field( 'FF3' )
+NNff = NNforce_field( 'FF3', aname )
 
 # compute displacement tensor for all data points, output as numpy array
 #rij = routines.compute_displacements(xyz)
@@ -43,7 +45,11 @@ model = construct_NN_Model( sym_input, NNff, aname )
 model.compile(optimizer='adam', loss='mean_squared_error', metrics=['mae'])
 
 print( "fitting Neural network to charge data...")
+print(np.array(sym_input).shape)
+print(np.array(charges).shape)
+input("DEBUG")
 history=model.fit( sym_input , charges, batch_size=20, epochs=5000, validation_split=0.1 )
+
 print( "done fitting Neural network" )
  
 print( "summary" )

@@ -26,10 +26,12 @@ class NNforce_field(object):
     """
     this is neural network force field object, that stores parameters that define
     the atomic neural networks
+        aname: list of names of the atoms
     """
 
-    def __init__(self, name):
+    def __init__(self, name, aname=["H", "O"]):
         # setup attributes of force field based on name
+        self.aname = aname
         if name is 'FF1':
            self.initialize_FF1()
         elif name is 'FF2':
@@ -194,44 +196,11 @@ class NNforce_field(object):
 
         gauss_vec = np.linspace(gauss_width_min,gauss_width_max,num_widths)
         cutoff_vec = np.linspace(cutoff_min,cutoff_max,num_cutoffs)
-        print(range(num_widths))
-        # setup force field for oxygen
-        oxygenNN = elementNN()
-        self.element_force_field["O"] = oxygenNN
-        # add list of symmetry function tuples
-        for i in range(num_widths):
-            for j in range(num_cutoffs):
-                oxygenNN.symmetry_functions.append( ( gauss_vec[i], cutoff_vec[j] ) )
+        for e in self.aname:
+            elemNN = elementNN()
+            self.element_force_field[e] = elemNN
+            for i in range(num_widths):
+                for j in range(num_cutoffs):
+                    elemNN.symmetry_functions.append( ( gauss_vec[i], cutoff_vec[j] ) )
 
 
-        # setup force field for hydrogen
-        hydrogenNN = elementNN()
-        self.element_force_field["H"] = hydrogenNN
-        # add list of symmetry function tuples
-        for i in range(num_widths):
-            for j in range(num_cutoffs):
-                hydrogenNN.symmetry_functions.append( ( gauss_vec[i], cutoff_vec[j] ) )
-
-
-
-
-
-
-    
-
-
-
-
-         
-
-
-
-
-
-
-
-
-
-
-
-        
