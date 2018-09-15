@@ -32,6 +32,8 @@ def radial_gaussian( rij, i_atom , width, rshift, Rc ):
     Gi=0
     for j_atom in range( rij.shape[0] ):
 
+        # DEBUG
+        
         fc = cutoff_function( rij[i_atom][j_atom] , Rc )
         Gi = Gi + fc * np.exp(-width * (rij[i_atom][j_atom]-rshift)**2 )
         #print( j_atom , Gi )

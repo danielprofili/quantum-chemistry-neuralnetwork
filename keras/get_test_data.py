@@ -117,4 +117,11 @@ def get_test_data():
         -0.1241
         ))
 
+    # convert xyz to pairwise distances
+    sz = xyz.shape;
+
+    for t in range(0, xyz.shape[2]):
+        print()
+
+
     return (xyz, charges)

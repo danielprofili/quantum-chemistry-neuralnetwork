@@ -16,6 +16,7 @@ def get_dists(xyz):
     # the elements being used
     elems = [s for s in re.findall('[A-Z]', xyz)]
     pos = [[nums[x], nums[x+1], nums[x+2]] for x in range(0, len(nums), 3)]
+    pos_np = np.array(pos)
     #tup_list = []
     #dist_list = []
     dists = np.zeros((len(elems), len(elems)))
@@ -38,6 +39,9 @@ def get_dists(xyz):
             #dist_list.append(dist)
 
     #return (tup_list, dist_list)
+    # DEBUG
+    #print(dists)
+    #input("DEBUG")
     return dists, elems
 
 # get_atom_names: get the non-unique atoms from an input qc file
@@ -73,6 +77,8 @@ def parse_input(inputfile):
     dist_list = []
     chg_list = []
     atom_names = get_atom_names(inputfile)
+    dist_array = np.zeros((len(atom_names), len(atom_names), 1))
+    charge_array = np.zeros((len(atom_names), 1));
     # set up regex parsing object for parsing the molecule name (TFSI_###_###)
     reg = re.compile('TFSI_[0-9]{1,3}_[0-9]{1,3}\.gzmat')
     #f = open(inputfile)
@@ -122,9 +128,20 @@ def parse_input(inputfile):
             #dist_list.append(big_tuple)
 
             # create list of all pairwise distance arrays
+            # _temp arrays made so 3d arrays can be concatenated
             if len(dists) > 0:
-                dist_list.append(dists)
-            chg_list.append(charges)
+                #dist_list.append(dists)
+                dists_temp = np.zeros((len(atom_names), len(atom_names), 1))
+                dists_temp[:,:,0] = dists
+                #print(dist_array.shape)
+                #print(dists.shape)
+                dist_array = np.append(dist_array, dists_temp, 2)
+
+
+            if len(charges) > 0:
+                charges_temp = np.zeros((len(atom_names), 1))
+                charges_temp[:,0] = charges
+                charge_array = np.append(charge_array, charges_temp, 1)
 
             # now should go to the next atom
             # DEBUG:
@@ -136,8 +153,6 @@ def parse_input(inputfile):
         # reached end of file
     
     # convert lists into 3d arrays
-    dist_array = np.array(dist_list)
-    charge_array = np.array(chg_list)
     #dist_array = np.zeros([len(dist_list[0]), len(dist_list[0]), len(dist_list)])
     #charge_array = np.zeros([len(chg_list[0]), len(chg_list[0]), len(chg_list)])
     #for i in range(0, len(dist_list)):

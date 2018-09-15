@@ -174,13 +174,13 @@ def construct_symmetry_input( NN , rij, aname ):
         typeNN = NN.element_force_field[ aname[i_atom] ]
 
         # loop over data points
-        for i in range( rij.shape[0] ):
+        for i in range( rij.shape[2] ):
             input_i=[]
 
             # now loop over symmetry functions for this element
             for i_sym in range( len( typeNN.symmetry_functions ) ):
                 # construct radial gaussian symmetry function
-                G1 = sym.radial_gaussian( rij[i] , i_atom , typeNN.symmetry_functions[i_sym][0] , typeNN.symmetry_functions[i_sym][1], typeNN.Rc )
+                G1 = sym.radial_gaussian( rij[:,:,i] , i_atom , typeNN.symmetry_functions[i_sym][0] , typeNN.symmetry_functions[i_sym][1], typeNN.Rc )
                 input_i.append( G1 )
 
             input_atom.append( input_i ) 

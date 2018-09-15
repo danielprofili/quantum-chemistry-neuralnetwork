@@ -18,8 +18,20 @@ inputfile='input.qc'
 # read input data, output as numpy arrays
 (aname, rij, charges ) = gen.parse_input( inputfile )
 
+# FOR TESTING
+rij = rij[:,:,1:4]
+charges = charges[0:3]
+
+print(rij[:,:,1])
+print(rij.shape)
+#print(charges)
+#print(aname)
+
+
 # DEBUGGING
-(xyz_sample, charges_sample) = gt.get_test_data();
+#(xyz_sample, charges_sample) = gt.get_test_data();
+#print(xyz_sample)
+#print(xyz_sample.shape[2])
 
 # compute SAPT-FF energies
 #energy_SAPTFF = compute_SAPT_FF_energies( xyz , 'h2o_template.pdb', 'water_residue.xml' , 'water_sapt.xml' )
