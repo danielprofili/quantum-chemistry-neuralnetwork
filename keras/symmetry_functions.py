@@ -28,9 +28,11 @@ def radial_gaussian( rij, i_atom , width, rshift, Rc ):
     """
 
     #print(" symmetry function ", i_atom )
+    #print(rij)
+    #input('radial gaussian')
 
     Gi=0
-    for j_atom in range( rij.shape[0] ):
+    for j_atom in range( rij.shape[1] ):
 
         # DEBUG
         

@@ -187,6 +187,7 @@ def construct_symmetry_input( NN , rij, aname ):
 
         # convert 2D list to array
         input_atom = np.array( input_atom )
+        input_atom = input_atom.reshape((input_atom.shape[1], input_atom.shape[0]))
         # append to list
         sym_input.append( input_atom )
 

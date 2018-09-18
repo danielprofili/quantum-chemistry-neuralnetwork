@@ -17,14 +17,19 @@ inputfile='input.qc'
 
 # read input data, output as numpy arrays
 (aname, rij, charges ) = gen.parse_input( inputfile )
+print(rij.shape)
+input('shape of rij')
 
 # FOR TESTING
 rij = rij[:,:,1:4]
-charges = charges[0:3]
+charges = charges[:,1:4]
 
-print(rij[:,:,1])
+#print(rij[:,:,1])
 print(rij.shape)
+input('shape of rij again')
 #print(charges)
+#print(charges.shape)
+#input('debug')
 #print(aname)
 
 
@@ -50,6 +55,13 @@ NNff = NNforce_field( 'FF3', aname )
 
 # construct symmetry functions for NN input
 sym_input = routines.construct_symmetry_input( NNff , rij , aname )
+sym_input = np.array(sym_input)
+sym_input_new = []
+for i in range(len(aname)):
+    print(sym_input[i, :, :])
+    sym_input_new.append(sym_input[i, :, :]) 
+
+sym_input = sym_input_new
 
 # construct NN model
 model = construct_NN_Model( sym_input, NNff, aname )
@@ -63,8 +75,9 @@ input("DEBUG")
 history=model.fit( sym_input , charges, batch_size=20, epochs=5000, validation_split=0.1 )
 
 print( "done fitting Neural network" )
- 
+
 print( "summary" )
+
 model.summary()
 
 print( "predictions" )
