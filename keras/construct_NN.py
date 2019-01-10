@@ -121,7 +121,8 @@ def construct_NN_Model( sym_input, NNff, aname):
     #predictions = add(NNtotal)
 
     # for charges, we want a vector as output
-    predictions = concatenate(NNtotal)
+    predictions = NNtotal
+    #predictions = concatenate(NNtotal)
 
     model = Model(inputs=inputs, outputs=predictions)
 

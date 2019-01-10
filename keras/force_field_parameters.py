@@ -204,7 +204,7 @@ class NNforce_field(object):
                     elemNN.symmetry_functions.append( ( gauss_vec[i], cutoff_vec[j] ) )
 
         # DEBUG
-        print(elemNN.symmetry_functions)
-        input("debuG")
+        #print(elemNN.symmetry_functions)
+        #input("debuG")
 
 
