@@ -1,4 +1,5 @@
 import sys
+import copy
 from keras.models import Model, Sequential
 from keras.layers import Input, Lambda, Dense, Activation, concatenate, add, LocallyConnected1D
 import keras.backend as K
@@ -21,7 +22,7 @@ inputfile='input.qc'
 #for i in range(len(aname)):
 
 
-#print(np.histogram(charges[13]))
+#print(np.histogram(charges[2]))
 #input('debugging')
 #print(rij.shape)
 #input('shape of rij')
@@ -30,8 +31,9 @@ inputfile='input.qc'
 charge_list=[ charges[i,:] for i in range(charges.shape[0]) ]
 
 # FOR TESTING
-rij = rij[:,:,1:3600]
-charge_list=[ charges[i,1:3600] for i in range(charges.shape[0]) ]
+#rij = rij[:,:,1:3600]
+#charge_list=[ charges[i,1:] for i in range(charges.shape[0]) ]
+#charge_list = copy.deepcopy(charges)
 
 #print(rij[:,:,1])
 #print(rij.shape)
@@ -83,7 +85,7 @@ print( "fitting Neural network to charge data...")
 #input("DEBUG")
 
 #history=model.fit( sym_input , charges, batch_size=20, epochs=5000, validation_split=0.1 )
-history=model.fit( sym_input , charge_list, batch_size=20, epochs=50, validation_split=0.1 )
+history=model.fit( sym_input , charge_list, batch_size=20, epochs=50, validation_split=0.1)
 
 print( "done fitting Neural network" )
 
@@ -106,6 +108,10 @@ y = model.predict_on_batch( sym_input )
 for i in range(len(aname)):
     q_qm = charge_list[i]
     q_nn = y[i]
+    print(q_qm)
+    print()
+    print(q_nn)
+    input()
     nn_plot.plot_atom(aname[i] + str(i), q_nn, q_qm)
 
 

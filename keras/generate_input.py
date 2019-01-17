@@ -91,6 +91,7 @@ def parse_input(inputfile):
                 # (i.e. where there's a TFSI_XX_XX.gzmat)
                 line = f.readline()
 
+            file_name = line
             # now at the line containing the xyz
             line = f.readline()
             xyz = ''
@@ -121,6 +122,9 @@ def parse_input(inputfile):
                 chg = re.findall('-?\d.\d*', line)
                 if len(chg) > 0:
                     charges.append(float(chg[0]))
+                    if float(chg[0]) >= 1 and atoms[len(charges) - 1] == 'O':
+                        print(file_name)
+                        input("found broken file")
                 line = f.readline()
             
             # create the big tuple containing all data for this perturbation
