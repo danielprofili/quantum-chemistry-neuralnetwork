@@ -12,9 +12,10 @@ working_dir=$(pwd)
 # first determine minimum energy
 min=$(./min_energy.sh)
 
-# initialize the input file
+# initialize the input files
 #echo "BEGIN INPUT FILE" > $working_dir/input
-echo "BEGIN INPUT FILE" > $working_dir/$dest_dir/input_all.qc
+rm $working_dir/$dest_dir/*
+echo "BEGIN INPUT FILE (all)" > $working_dir/$dest_dir/input_all.qc
 cd subs
 for f in *
 do
