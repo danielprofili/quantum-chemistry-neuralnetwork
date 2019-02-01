@@ -43,8 +43,10 @@ do
                         # in the thresholds)
                         if [ $filename_empty_flag -ge 1 ]; then
                                 source $working_dir/write_input.sh $f $working_dir/$dest_dir/$filename
+                                echo "Wrote $f to $filename"
                         fi
                         source $working_dir/write_input.sh $f $working_dir/$dest_dir/input_all.qc
+                        echo "Wrote $f to input_all"
                         #echo -e "\n$f\n" >> $working_dir/input
                         #cat xyz/$f.xyz >> $working_dir/input
                         #echo -e "\n===================\n" >> $working_dir/input
