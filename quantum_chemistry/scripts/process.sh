@@ -9,15 +9,13 @@
 # 3. Write xyz files to psi4 .inp files
 # 4. Write .pbs PACE job files that reference the .inp files and run psi4
 
-
-
-
-gzmat_temp="TFSI.gzmat"
-xyz_folder="xyz"
-gzmat_folder="gzmat"
-inp_folder="inp"
-pbs_folder="pbs"
-sub_folder="charge_submission"
+[ ! -z $1 ] && gzmat_temp=$1 || { echo "Specify a template"; exit 1; }
+#gzmat_temp= [ ! -z $1 ] && $1 || "TFSI.gzmat"
+xyz_folder="../xyz"
+gzmat_folder="../gzmat"
+inp_folder="../inp"
+pbs_folder="../pbs"
+sub_folder="../charge_submission"
 
 # Perturb template gzmat file 3600 times
 cd $gzmat_folder
