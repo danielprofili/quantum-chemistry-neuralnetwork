@@ -5,6 +5,8 @@ from random import *
 import sys
 import copy
 import os
+import argparse
+import ntpath
 
 # get parameters from a file into a dictionary
 def write_input_file(filename, filename2, xyz_file):
@@ -57,12 +59,21 @@ def write_input_file(filename, filename2, xyz_file):
 # end write_input_file()
 
 # begin the main script
-print('begin main function')
-for fn in os.listdir('.'):
+#print('begin main function')
+parser = argparse.ArgumentParser(description='Generate input files from xyz files.')
+parser.add_argument('-s', '--source-dir', required=True, dest='source_dir', metavar='Source directory', help='Directory to get xyz files from')
+parser.add_argument('-d', '--dest-dir', dest='dest_dir', required=True, metavar='Destination directory', help='Directory to output inp files to')
+parser.add_argument('-t', '--template', required=True, metavar='Template input file', help='Template .inp file to take unchanging front matter (variable declarations, molecule name, etc)')
+args = parser.parse_args()
+
+#for fn in os.listdir('.'):
+for fn in os.listdir(args.source_dir):
     if os.path.isfile(fn) and ('.xyz' in fn) and not ('.inp' in fn):
         # print(fn)
-        if 'TFSI_temp.inp' not in fn:
-            write_input_file('TFSI_temp', fn[:len(fn)-4] + '.inp', fn)
+        #if 'TFSI_temp.inp' not in fn:
+        if args.template not in fn:
+            #write_input_file('TFSI_temp', fn[:len(fn)-4] + '.inp', fn)
+            write_input_file(args.template, args.dest_dir + fn[:len(fn)-4] + '.inp', fn)
             # pause() # not actually a method but it stops the program
             print('Wrote ' + fn + '.inp\n')
 

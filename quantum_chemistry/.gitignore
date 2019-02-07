@@ -7,3 +7,4 @@ xyz/*.xyz
 example/test/*
 pbs/
 inp/testing
+*_files/
