@@ -68,12 +68,14 @@ args = parser.parse_args()
 
 #for fn in os.listdir('.'):
 for fn in os.listdir(args.source_dir):
-    if os.path.isfile(fn) and ('.xyz' in fn) and not ('.inp' in fn):
-        # print(fn)
+    fullpath = os.path.join(args.source_dir, fn)
+    if os.path.isfile(fullpath) and ('.xyz' in fn) and not ('.inp' in fn):
         #if 'TFSI_temp.inp' not in fn:
         if args.template not in fn:
             #write_input_file('TFSI_temp', fn[:len(fn)-4] + '.inp', fn)
-            write_input_file(args.template, args.dest_dir + fn[:len(fn)-4] + '.inp', fn)
+            base, ext = fn.split('.')
+            outpath = os.path.join(args.dest_dir, base + '.inp')
+            write_input_file(args.template, outpath, fullpath)
             # pause() # not actually a method but it stops the program
             print('Wrote ' + fn + '.inp\n')
 
