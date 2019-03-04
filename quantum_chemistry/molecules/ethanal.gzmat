@@ -1,0 +1,29 @@
+#Put Keywords Here, check Charge and Multiplicity.
+
+ ethanal.gzmat
+
+0  1
+C
+C  1  r2
+O  1  r3  2  a3
+H  1  r4  2  a4  3  d4
+H  2  r5  1  a5  3  d5
+H  2  r6  1  a6  3  d6
+H  2  r7  1  a7  3  d7
+Variables:
+r2= 1.5178
+r3= 1.2153
+a3= 125.01
+r4= 1.1238
+a4= 114.63
+d4= 179.97
+r5= 1.0967
+a5= 110.73
+d5=   0.03
+r6= 1.1029
+a6= 109.94
+d6= 121.61
+r7= 1.1029
+a7= 109.94
+d7= 238.39
+

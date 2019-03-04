@@ -1,0 +1,9 @@
+#PBS -N FILL_JOB_NAME
+#PBS -q iw-shared-6 
+#PBS -l walltime=50:00
+#PBS -l nodes=1:ppn=1
+#PBS -j oe
+#PBS -o out.$PBS_JOBID
+#PBS -m ae
+
+echo "hello world"

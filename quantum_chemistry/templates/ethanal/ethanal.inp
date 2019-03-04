@@ -1,6 +1,6 @@
 
-molecule ethanol {
-FLAG
+molecule ethanal {
+DATA_FLAG
   0    1
 }
 

@@ -1,7 +1,7 @@
 
-molecule ethanol {
-FLAG
-  0    1
+molecule MOLECULE_FLAG {
+DATA_FLAG
+  CHARGE_FLAG    1
 }
 
 set {

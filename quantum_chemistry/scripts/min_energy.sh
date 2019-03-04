@@ -4,14 +4,17 @@
 # Finds the minimum energy in all input files.
 #
 # 25 January 2019
-home=$(pwd)
-if [ -f min_energy ]; then
-        cat min_energy 
+#home=$(pwd)
+help_msg="USAGE: ./min_energy.sh RESULTS_DIR"
+[ ! -z $1 ] && results_dir=$1 || { echo $help_msg; exit 1; }
+if [ -f $results_dir/min_energy ]; then
+        cat $results_dir/min_energy 
 else
-        cd subs
+        #cd subs
         min=0
         for f in *
         do
+                # f is the folder name for the molecule output
                 energy=$(grep "Total Energy" ${f}/${f}.out | grep -E -o "\-[0-9]+\.[0-9]+")
                 #echo $energy
                 # checks if the energy is empty
@@ -31,7 +34,7 @@ else
                         fi
                 fi
         done
-        cd $home
+        #cd $home
         echo $min > min_energy
         echo $min
 fi

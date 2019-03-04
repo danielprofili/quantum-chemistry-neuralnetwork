@@ -7,11 +7,11 @@ np=$2
 # might want to change to global path here 
 # as these will be used by every job
 rootpath="/gpfs/pace1/project/chem-mcdaniel/dprofili3/NN_project/TFSI_charge_fitting/quantum_chemistry"
-rundma="$rootpath/charge_submission/gdma"
-dmatemplate="$rootpath/charge_submission/gdma_template.data"
+rundma="$rootpath/templates/gdma"
+dmatemplate="$rootpath/templates/gdma_template.data"
 #psi4template="psi4_template.inp"
-runmpfit="$rootpath/charge_submission/mpfit"
-runparse="$rootpath/charge_submission/parse_psiDMA.pl"
+runmpfit="$rootpath/templates/mpfit"
+runparse="$rootpath/templates/parse_psiDMA.pl"
 
 # these are i/o file names based on input name
 dmainput="${name}_gdma.data"

@@ -19,7 +19,7 @@ do
     filename=${f##*/}
     filename=${filename%%.*}
     touch $dest_dir/$filename.xyz
-    obabel -igzmat "$f" -oxyz > "$dest_dir/$filename.xyz"
+    obabel -igzmat "$f" -oxyz > "$dest_dir/$filename.xyz" 
     # echo $filename
 done
 

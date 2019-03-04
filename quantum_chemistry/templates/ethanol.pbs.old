@@ -7,7 +7,6 @@
 
 cd $PBS_O_WORKDIR
 
-
 # here we need to use the conda download and environment for newer psi4
 # default PACE installation is too old for DMA
 

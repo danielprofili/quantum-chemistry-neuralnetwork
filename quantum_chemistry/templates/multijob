@@ -1,0 +1,64 @@
+#PBS -N FILL_JOB_NAME
+#PBS -q iw-shared-6 
+#PBS -l walltime=50:00
+#PBS -l nodes=FILL_NUM_JOBS:ppn=1
+#PBS -j oe
+#PBS -o out.$PBS_JOBID
+#PBS -m ae
+
+cd $PBS_O_WORKDIR
+NP=$(wc -l < $PBS_NODEFILE)
+
+# add all modules needed here
+module purge
+module load gnuparallel/20180822
+. `which env_parallel.bash`
+module list
+module load anaconda3/latest
+source activate psi4
+
+# set up psi4 scratch directories and stuff
+
+export myscratch=~/scratch/psi4.$PBS_JOBID
+export PSI_SCRATCH=$myscratch
+mkdir -p $PSI_SCRATCH
+
+export PSIDATADIR=""
+export PSIDATADIR=~/.conda/envs/psi4/share/psi4/
+
+# Cherry 06/03/2015
+# Make sure the JOBFILE length is equal to nodes*ppn
+#
+#JOBFILE should be set in the environment, as qsub -v JOBFILE=<filenmae>
+#or default file name jobs.txt will be used.
+
+JOBFILE=${JOBFILE:-jobs.txt}
+
+if [ ! -f $JOBFILE ]; then echo "File $JOBFILE does not exist. Exiting"; exit 0; fi
+
+JOBCOUNT=$(wc -l < $JOBFILE)
+
+
+if [ $NP -ne $JOBCOUNT ]
+then
+   echo "nodes*ppn must be equal to the number of commands in "$JOBFILE; exit 0; 
+fi
+
+if [ ! -d $HOME/.parallel-$PBS_JOBID ]; then mkdir $HOME/.parallel-$PBS_JOBID; fi
+
+TEMP=$HOME/.parallel-$PBS_JOBID
+
+uniq $PBS_NODEFILE > $TEMP/uniqnode
+anchor=1
+
+for i in `cat $TEMP/uniqnode`
+do
+    numCores=`grep $i $PBS_NODEFILE|wc -l`
+        echo "sending " $numCores "jobs to host " $i    
+        newAnchor=$(($numCores+$anchor))
+    echo "starting line "$anchor" ending line "$(($newAnchor-1)) 
+    sed -n -e ${anchor},${newAnchor}p $JOBFILE |env_parallel -S ${numCores}/${i} &  
+    anchor=$newAnchor
+done
+wait
+rm -rf ~/.parallel-$PBS_JOBID

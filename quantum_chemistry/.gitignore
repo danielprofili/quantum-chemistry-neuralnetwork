@@ -8,4 +8,5 @@ example/test/*
 pbs/
 inp/testing
 output/
+log*
 

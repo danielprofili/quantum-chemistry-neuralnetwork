@@ -6,16 +6,18 @@
 # 
 # 29 May 2018
 
-dest_dir="nn"
+help_msg="USAGE: ./nn_input.sh SRC DEST"
+[ ! -z $1 ] && src_dir=$1 || { echo $help_msg; exit 1; }
+[ ! -z $2 ] && dest_dir=$2 || { echo $help_msg; exit 1; }
+#dest_dir="nn"
 working_dir=$(pwd)
 
 # first determine minimum energy
-min=$(./min_energy.sh)
+min=$(./min_energy.sh $src_dir)
 
 # initialize the input files
-#echo "BEGIN INPUT FILE" > $working_dir/input
-rm $working_dir/$dest_dir/*
-echo "BEGIN INPUT FILE (all)" > $working_dir/$dest_dir/input_all.qc
+rm $dest_dir/*
+echo "BEGIN INPUT FILE (all)" > $dest_dir/input_all.qc
 cd subs
 for f in *
 do

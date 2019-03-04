@@ -43,8 +43,10 @@ def write_input_file(filename, filename2, xyz_file):
     # done transferring data from xyz file to input file
     # now get the rest of the stuff from the template
     
-    while '-1' not in line:
+    while 'DATA_FLAG' not in line:
         line = f.readline()
+
+    line = f.readline()
 
     while len(line) > 0:
         f2.write(line)
