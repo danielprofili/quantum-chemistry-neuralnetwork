@@ -1,0 +1,11 @@
+File FILL.fchk
+
+Angstrom
+Multipoles
+  switch 4
+  Limit 4
+  Radius C 0.53 N 0.53 O 0.53 S 0.53 F 0.53 H 0.53 B 0.53 CL 0.53 BR 0.53
+Start
+
+Finish
+

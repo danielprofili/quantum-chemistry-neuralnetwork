@@ -1,0 +1,29 @@
+#Put Keywords Here, check Charge and Multiplicity.
+
+ acetyl_chloride.gzmat
+
+0  1
+C
+C  1  r2
+O  1  r3  2  a3
+Cl  1  r4  2  a4  3  d4
+H  2  r5  1  a5  3  d5
+H  2  r6  1  a6  3  d6
+H  2  r7  1  a7  3  d7
+Variables:
+r2= 1.5095
+r3= 1.1877
+a3= 129.33
+r4= 1.8917
+a4= 110.79
+d4= 179.97
+r5= 1.0967
+a5= 109.26
+d5=   0.03
+r6= 1.0983
+a6= 109.87
+d6= 121.10
+r7= 1.0983
+a7= 109.87
+d7= 238.90
+

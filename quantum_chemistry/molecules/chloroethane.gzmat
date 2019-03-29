@@ -1,0 +1,33 @@
+#Put Keywords Here, check Charge and Multiplicity.
+
+ chloroethane.gzmat
+
+0  1
+C
+C  1  r2
+H  1  r3  2  a3
+H  1  r4  2  a4  3  d4
+H  1  r5  2  a5  3  d5
+Cl  2  r6  1  a6  3  d6
+H  2  r7  1  a7  3  d7
+H  2  r8  1  a8  3  d8
+Variables:
+r2= 1.5240
+r3= 1.1025
+a3= 109.28
+r4= 1.0982
+a4= 111.46
+d4= 119.37
+r5= 1.0982
+a5= 111.46
+d5= 240.63
+r6= 1.8508
+a6= 111.58
+d6= 179.97
+r7= 1.0953
+a7= 112.43
+d7= 298.13
+r8= 1.0953
+a8= 112.43
+d8=  61.87
+

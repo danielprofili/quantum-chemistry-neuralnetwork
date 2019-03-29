@@ -1,0 +1,33 @@
+#Put Keywords Here, check Charge and Multiplicity.
+
+ acetic_acid.gzmat
+
+0  1
+C
+C  1  r2
+O  2  r3  1  a3
+H  1  r4  2  a4  3  d4
+H  1  r5  2  a5  3  d5
+H  1  r6  2  a6  3  d6
+O  2  r7  1  a7  3  d7
+H  7  r8  2  a8  1  d8
+Variables:
+r2= 1.5180
+r3= 1.2153
+a3= 126.44
+r4= 1.0938
+a4= 109.50
+d4=   0.03
+r5= 1.0989
+a5= 109.99
+d5= 121.02
+r6= 1.0989
+a6= 109.99
+d6= 238.98
+r7= 1.3769
+a7= 110.96
+d7= 179.97
+r8= 0.9797
+a8= 105.62
+d8= 179.97
+

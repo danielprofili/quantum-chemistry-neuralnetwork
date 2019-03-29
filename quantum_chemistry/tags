@@ -1,0 +1,13 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+division	filter_by_energy.py	/^from __future__ import division$/;"	i
+energy	filter_by_energy.py	/^energy = sys.argv[2]$/;"	v
+filename	filter_by_energy.py	/^                filename = "input_" + str(int(rn * 1000)) + ".qc"$/;"	v
+min_energy	filter_by_energy.py	/^min_energy = sys.argv[1]$/;"	v
+sys	filter_by_energy.py	/^import sys$/;"	i
+sys	floating_comp.py	/^import sys$/;"	i
+thresholds	filter_by_energy.py	/^thresholds = [20\/1000, 50\/1000, 100\/1000, 500\/1000]$/;"	v

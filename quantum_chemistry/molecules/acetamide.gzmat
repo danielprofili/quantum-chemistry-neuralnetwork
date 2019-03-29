@@ -1,0 +1,37 @@
+#Put Keywords Here, check Charge and Multiplicity.
+
+ acetamide.gzmat
+
+0  1
+C
+C  1  r2
+N  2  r3  1  a3
+O  2  r4  1  a4  3  d4
+H  1  r5  2  a5  3  d5
+H  1  r6  2  a6  3  d6
+H  1  r7  2  a7  3  d7
+H  3  r8  2  a8  1  d8
+H  3  r9  2  a9  1  d9
+Variables:
+r2= 1.5348
+r3= 1.3794
+a3= 115.39
+r4= 1.2278
+a4= 122.29
+d4= 180.03
+r5= 1.0985
+a5= 108.69
+d5= 237.73
+r6= 1.0993
+a6= 114.54
+d6= 359.59
+r7= 1.0986
+a7= 108.70
+d7= 121.45
+r8= 1.0156
+a8= 118.18
+d8= 180.16
+r9= 1.0131
+a9= 123.31
+d9= 359.81
+

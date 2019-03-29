@@ -1,0 +1,14 @@
+
+molecule ethanol {
+FLAG
+  0    1
+}
+
+set {
+basis def2-SVP
+}
+
+E, wfn = energy('pbe0', return_wfn=True)
+fchk_writer = psi4.FCHKWriter(wfn)
+fchk_writer.write('FILL.fchk')
+
