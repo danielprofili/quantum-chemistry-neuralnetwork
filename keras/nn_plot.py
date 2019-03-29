@@ -15,5 +15,7 @@ def plot_atom(atom, q_nn, q_qm, outputdir='plots/'):
     plt.ylabel('NN charge')
     plt.title(atom)
     # for debugging
-    print('saving plot to ' + outputdir + atom + '.png') 
     plt.savefig(outputdir + atom + '.png')
+
+    # VERY iMPORTANT
+    plt.clf()

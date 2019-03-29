@@ -191,8 +191,8 @@ class NNforce_field(object):
         num_widths = 10
 
         cutoff_min = 3.0
-        cutoff_max = 6.0
-        num_cutoffs = 5
+        cutoff_max = 8.0
+        num_cutoffs = 10
 
         gauss_vec = np.linspace(gauss_width_min,gauss_width_max,num_widths)
         cutoff_vec = np.linspace(cutoff_min,cutoff_max,num_cutoffs)
