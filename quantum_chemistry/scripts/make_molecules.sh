@@ -1,5 +1,5 @@
 #!/bin/bash
-$usage="USAGE: ./make_molecules.sh MOLECULE COUNT NET_CHARGE BATCHSIZE SCRIPTS_FOLDER GZMAT_TEMPLATE GZMAT_FOLDER XYZ_FOLDER"
+usage="USAGE: ./make_molecules.sh MOLECULE COUNT NET_CHARGE BATCHSIZE SCRIPTS_FOLDER GZMAT_TEMPLATE GZMAT_FOLDER XYZ_FOLDER"
 [ ! -z $1 ] && molecule=$1 || { echo $usage; exit 1; }
 [ ! -z $2 ] && count=$2 || { echo $usage; exit 1; }
 [ ! -z $3 ] && net_charge=$3 || { echo $usage; exit 1; }
