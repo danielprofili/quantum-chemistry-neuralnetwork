@@ -32,57 +32,11 @@ mkdir -p $inp_folder
 mkdir -p $pbs_folder
 mkdir -p $sub_folder
 
+# Generate the molecules
+source $scripts_folder/make_molecules.sh $molecule $count $net_charge $scripts_folder $gzmat_temp $gzmat_folder $xyz_folder
 
-# Perturb template gzmat file 
-# convert to gzmat
-source $scripts_folder/load_openbabel.sh
-obabel -i xyz molecules/$molecule.xyz -o gzmat > molecules/$molecule.gzmat
-#cd $gzmat_folder
-echo "[$(date +"%F %T")] Perturbing $count molecules..."
-gzmat_temp="molecules/${molecule}.gzmat"
-python $scripts_folder/perturb.py $gzmat_temp --count $count --percent 0.05 --output-dir $gzmat_folder --reset 100
-echo "[$(date +"%F %T")]...done"
-
-# Convert gzmat files to xyz
-echo "[$(date +"%F %T")]Converting to .gzmat..."
-source $scripts_folder/load_openbabel.sh
-source $scripts_folder/gzmat2xyz.sh $gzmat_folder $xyz_folder >/dev/null
-echo "[$(date +"%F %T")]...done"
-
-# write xyz files to inp files
-#cd $xyz_folder
-echo "[$(date +"%F %T")]Making input files..."
-
-# create template, if necessary
-inp_template_path=$templates_folder/$molecule/$molecule.inp
-pbs_template_path=$templates_folder/$molecule/$molecule.pbs
-if [ ! -d $templates_folder/$molecule ]; then
-        mkdir -p $templates_folder/$molecule
-        cp $templates_folder/inp $inp_template_path
-        cp $templates_folder/pbs $pbs_template_path
-        sed -i "s/MOLECULE_FLAG/${molecule}/" $inp_template_path
-        sed -i "s/CHARGE_FLAG/${net_charge}/" $inp_template_path
-fi
-
-# run script
-python $scripts_folder/make_inp.py --source-dir $xyz_folder --dest-dir $inp_folder --template $inp_template_path 
-#cd ..
-#mv $xyz_folder/*.inp $inp_folder
-echo "[$(date +"%F %T")]...done"
-
-# Write pbs files
-#cd $inp_folder
-echo "[$(date +"%F %T")]Writing pbs files..."
-source $scripts_folder/inp2pbs.sh $pbs_template_path $pbs_folder $inp_folder
-#cd ..
-#mv $inp_folder/*pbs $pbs_folder
-echo "[$(date +"%F %T")]...done"
-
-# set up the submission directories
-echo "[$(date +"%F %T")]Setting up submission directories..."
-#cd ${molecule}_files
-source $scripts_folder/sub_setup.sh $molecule $pbs_folder $sub_folder $inp_folder $templates_folder/run_charges.sh $templates_folder/multijob
-echo "[$(date +"%F %T")]...done"
+# Submit to PACE
+source $scripts_folder/pace_submit.sh $scripts_folder $pbs_template_path $pbs_folder $inp_folder $sub_folder $templates_folder
 
 # generate the input file
 #echo "\nGenerating neural network input file..."
