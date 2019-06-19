@@ -24,6 +24,7 @@ pbs_folder="$root_dir/pbs"
 sub_folder="$root_dir/subs"
 scripts_folder="$(pwd)/scripts"
 templates_folder="$(pwd)/templates"
+gzmat_temp="$(pwd)/molecules/$molecule.gzmat"
 
 # set up directories
 mkdir -p $xyz_folder
@@ -36,7 +37,7 @@ mkdir -p $sub_folder
 source $scripts_folder/make_molecules.sh $molecule $count $net_charge $scripts_folder $gzmat_temp $gzmat_folder $xyz_folder
 
 # Submit to PACE
-source $scripts_folder/pace_submit.sh $scripts_folder $pbs_template_path $pbs_folder $inp_folder $sub_folder $templates_folder
+#source $scripts_folder/pace_submit.sh $scripts_folder $pbs_template_path $pbs_folder $inp_folder $sub_folder $templates_folder
 
 # generate the input file
 #echo "\nGenerating neural network input file..."

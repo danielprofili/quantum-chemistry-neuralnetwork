@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#module load anaconda3/latest
+#source activate psi4
+
+export PSIDATADIR=""
+export PSIDATADIR=~/.conda/envs/psi4/share/psi4/
+
+./run_charges.sh FILL 2
